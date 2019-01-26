@@ -16,6 +16,8 @@ pipeline {
         }
         stage("preperation") {
             steps {
+                sh 'mkdir -p ~/bin'
+                sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
                 echo "Downloading ${params.device}.xml ..."
                 echo "repo int -u /mnt/e/los-mirror -b ${params.branch}"         
             }
