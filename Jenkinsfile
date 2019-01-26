@@ -25,7 +25,6 @@ pipeline {
                 sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
                 sh 'chmod a+x ~/bin/repo'
                 echo "Downloading ${params.device}.xml ..."
-                sh 'wget https://raw.githubusercontent.com/benlue-org/local_manifests/lineage-15.1/jfltexx.xml -P $LOCAL_MANIFESTS'
             }
         }
         stage("repo sync") {
