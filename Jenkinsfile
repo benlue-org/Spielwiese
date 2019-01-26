@@ -17,7 +17,7 @@ pipeline {
         }
         stage("preperation") {
             steps {
-                echo "Downloading ${params.device}.xml"
+                echo "Downloading ${params.device}.xml ..."
                 echo "repo int -u /mnt/e/los-mirror -b ${params.branch}"
             
             }
