@@ -1,5 +1,6 @@
-node('master') {
-
+agent {
+    node {
+        label 'my-defined-label'
     parameters {
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         choice(choices: ['jfltexx', 'jfvelte'], description: 'Select build device', name: 'device')
@@ -29,4 +30,4 @@ node('master') {
             }
         }
     }
-}
+
