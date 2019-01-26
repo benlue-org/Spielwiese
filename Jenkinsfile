@@ -17,22 +17,17 @@ pipeline {
         stage("preperation") {
             steps {
                 echo "Downloading ${params.device}.xml ..."
-                echo "repo int -u /mnt/e/los-mirror -b ${params.branch}"
-            
+                echo "repo int -u /mnt/e/los-mirror -b ${params.branch}"         
             }
         }
         stage("repo sync") {
             steps {
-                echo "${params.device}"
-                echo "${params.branch}"
-                echo "flag: ${params.userFlag}"
+                echo "Repo was syncing from ${params.mirror}"
             }
         }
         stage("build prozess") {
             steps {
-                echo "Repo was syncing from ${params.mirror}"
                 echo "Building ${params.device} ${params.branch}"
-                echo "flag: ${params.userFlag}"
             }
         }
     }
