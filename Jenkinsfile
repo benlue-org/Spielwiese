@@ -7,6 +7,7 @@ pipeline {
     }
 
     stages {
+        sleep 30
         stage("test") {
             steps {
                 echo "${params.device}"
