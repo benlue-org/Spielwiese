@@ -25,7 +25,7 @@ pipeline {
                 sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
                 sh 'chmod a+x ~/bin/repo'
                 echo "Downloading ${params.device}.xml ..."
-                sh 'wget https://github.com/benlue-org/local_manifests/blob/${params.branch}/${params.device} -P $LOCAL_MANIFESTS'
+                sh 'wget https://github.com/benlue-org/local_manifests/blob/${params.branch}/${params.device}.xml -O /$LOCAL_MANIFESTS/${params.device}.xml'
             }
         }
         stage("repo sync") {
