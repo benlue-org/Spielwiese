@@ -1,7 +1,8 @@
 pipeline {	
     agent any
     environment {
-        BUILD_PATH = '/home/lineageos/android/lineage'
+        MIRROR_PATH = '/mnt/e/los-mirror/LineageOS/android.git'
+        BUILD_PATH  = '/home/lineageos/android/lineage'
     }
     parameters {
         string(defaultValue: "Android Parametrized build", description: 'What environment?', name: 'userFlag')
@@ -22,13 +23,14 @@ pipeline {
                 sh 'mkdir -p ~/bin'
                 sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
                 sh 'chmod a+x ~/bin/repo'
-                echo "Downloading ${params.device}.xml ..."
-                echo "repo int -u /mnt/e/los-mirror -b ${params.branch}"         
+                echo "Downloading ${params.device}.xml ..."                    
             }
         }
         stage("repo sync") {
             steps {
                 dir("${BUILD_PATH}") {
+                    /* ToDo select mirror */
+                    echo "repo init -u ${MIRROR_PATH} -b ${params.branch}"
                     sh '''#!/bin/bash\nset +x\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
                 echo "Repo was syncing from ${params.mirror}"
                 }
