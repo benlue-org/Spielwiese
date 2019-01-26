@@ -1,6 +1,5 @@
-agent {
-    node {
-        label 'my-defined-label'
+pipeline {	
+    agent any
     parameters {
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
         choice(choices: ['jfltexx', 'jfvelte'], description: 'Select build device', name: 'device')
@@ -30,4 +29,4 @@ agent {
             }
         }
     }
-
+}
