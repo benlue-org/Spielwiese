@@ -28,5 +28,12 @@ pipeline {
                 echo "flag: ${params.userFlag}"
             }
         }
+        stage("build prozess") {
+            steps {
+                echo "Repo was syncing from ${params.repo-mirror}"
+                echo "Building ${params.device} ${params.branch}"
+                echo "flag: ${params.userFlag}"
+            }
+        }
     }
 }
