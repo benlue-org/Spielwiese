@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        node 'master'
+    }
 
     parameters {
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
