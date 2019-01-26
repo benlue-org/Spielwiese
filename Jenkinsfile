@@ -40,6 +40,8 @@ pipeline {
         stage("build prozess") {
             steps {
                 echo "Building ${params.device} ${params.branch}"
+                sh '''#!/bin/bash\nset +x\nsource ~/.profile\nbrunch jfltexx'''
+'''
             }
         }
     }
