@@ -32,7 +32,7 @@ pipeline {
                 dir("${BUILD_PATH}") {
                     /* ToDo select mirror */
                     echo "repo init -u ${MIRROR_PATH} -b ${params.branch}"
-                    sh '''#!/bin/bash\nset +x\nsource ~/.profile\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
+                    //sh '''#!/bin/bash\nset +x\nsource ~/.profile\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
                 echo "Repo was syncing from ${params.mirror}"
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 dir("${BUILD_PATH}") {
                    echo "Building ${params.device} ${params.branch}"
-                   sh '''#!/bin/bash\nset +x\nsource ~/.profile\nbrunch jfltexx'''
+                   sh '''#!/bin/bash\nset +x\nsource ~/.profile\nsource build/envsetup.sh\nbrunch jfltexx'''
             
                 }
             }
