@@ -1,7 +1,4 @@
-pipeline {
-    agent {
-        node 'master'
-    }
+node('master') {
 
     parameters {
         string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
