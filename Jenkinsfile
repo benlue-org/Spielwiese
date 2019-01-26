@@ -29,6 +29,7 @@ pipeline {
                 echo "flag: ${params.userFlag}"
             }
         }
+    }
         post {
         always {
             echo 'This will always run'
