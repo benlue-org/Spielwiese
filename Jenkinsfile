@@ -28,7 +28,7 @@ pipeline {
                 echo "${params.branch}"
                 echo "flag: ${params.userFlag}"
             }
-        }
+        }}
     }
         post {
         always {
