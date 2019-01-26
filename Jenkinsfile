@@ -1,8 +1,9 @@
 pipeline {	
     agent any
     environment {
-        MIRROR_PATH = '/mnt/e/los-mirror/LineageOS/android.git'
-        BUILD_PATH  = '/home/lineageos/android/lineage'
+        MIRROR_PATH     = '/mnt/e/los-mirror/LineageOS/android.git'
+        BUILD_PATH      = '/home/lineageos/android/lineage'
+        LOCAL_MANIFESTS = '/home/lineageos/android/lineage/.repo/local_manifests'
     }
     parameters {
         /* string(defaultValue: "Android Parametrized build", description: 'What environment?', name: 'userFlag') */
@@ -23,7 +24,8 @@ pipeline {
                 sh 'mkdir -p ~/bin'
                 sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
                 sh 'chmod a+x ~/bin/repo'
-                echo "Downloading ${params.device}.xml ..."                    
+                echo "Downloading ${params.device}.xml ..."
+                sh 'wget https://github.com/benlue-org/local_manifests/blob/${params.branch}/${params.device} -P $LOCAL_MANIFESTS'
             }
         }
         stage("repo sync") {
