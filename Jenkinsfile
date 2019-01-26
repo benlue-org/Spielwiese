@@ -10,22 +10,22 @@ pipeline {
     stages {
         stage("test") {
             steps {
-                sh "echo ${params.device}"
-                sh "echo ${params.branch}"
+                echo "${params.device}"
+                echo "${params.branch}"
                 echo "flag: ${params.userFlag}"
             }
         }
         stage("preperation") {
             steps {
-                sh "echo Downloading ${params.device}.xml"
-                sh "echo repo int -u /mnt/e/los-mirror -b ${params.branch}"
+                echo "Downloading ${params.device}.xml"
+                echo "repo int -u /mnt/e/los-mirror -b ${params.branch}"
             
             }
         }
         stage("repo sync") {
             steps {
-                sh "echo ${params.device}"
-                sh "echo ${params.branch}"
+                echo "${params.device}"
+                echo "${params.branch}"
                 echo "flag: ${params.userFlag}"
             }
         }
