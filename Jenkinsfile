@@ -5,9 +5,7 @@ pipeline {
         choice(choices: ['jfltexx', 'jfvelte'], description: 'Select build device', name: 'device')
         choice(choices: ['lineage-14.1', 'lineage-15.1', 'lineage-16.0'], description: 'Select build branch', name: 'branch')
         choice(choices: ['local-mirror', 'lineageos-mirror'], description: 'Select sync mirror', name: 'repo-mirror')
-
     }
-
     stages {
         stage("test") {
             steps {
