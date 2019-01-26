@@ -1,5 +1,8 @@
 pipeline {	
     agent any
+    environment {
+        BUILD_PATH = '/home/lineageos/android/lineage'
+    }
     parameters {
         string(defaultValue: "Android Parametrized build", description: 'What environment?', name: 'userFlag')
         choice(choices: ['jfltexx', 'jfvelte'], description: 'Select build device', name: 'device')
@@ -25,7 +28,10 @@ pipeline {
         }
         stage("repo sync") {
             steps {
+                dir("${BUILD_PATH}") {
+                    sh '''#!/bin/bash\nset +x\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
                 echo "Repo was syncing from ${params.mirror}"
+                }
             }
         }
         stage("build prozess") {
