@@ -41,7 +41,7 @@ pipeline {
             steps {
                 dir("${BUILD_PATH}") {
                    echo "Building ${params.device} ${params.branch}"
-                   sh '''#!/bin/bash\nset +x\nsource ~/.profile\nsource build/envsetup.sh\nbrunch jfltexx'''
+                   sh '''#!/bin/bash\nset +x\nsource ~/.profile\nsource build/envsetup.sh\nbreakfast jfltexx\nbrunch jfltexx'''
             
                 }
             }
