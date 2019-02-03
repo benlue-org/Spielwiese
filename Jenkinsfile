@@ -34,7 +34,7 @@ pipeline {
                        set -x
                        source ~/.profile
                        #repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
-                       source /build/envsetup.sh
+                       source build/envsetup.sh
                        #breakfast "$DEVICE"
                     '''
                 }
