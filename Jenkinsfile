@@ -26,8 +26,8 @@ pipeline {
                     sh '''#!/bin/bash
                         set -x
                         echo "${MIRROR_PATH}"
-			echo "${PWD}"
-                        echo "Hallo"
+			export USE_CCACHE=1
+			export CCACHE_COMPRESS
                     '''
             }
         }
