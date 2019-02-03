@@ -16,12 +16,12 @@ pipeline {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
                        set -x
-                       mkdir -p ~/bin
+                       //mkdir -p ~/bin
                        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
                        source ~/.profile
                        /*
                        repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
-                       mkdir -p .repo/local_manifests
+                       //mkdir -p .repo/local_manifests
                        wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml
                        */
                        
