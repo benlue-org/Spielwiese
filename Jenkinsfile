@@ -27,7 +27,7 @@ pipeline {
                         set -x
                         echo "${MIRROR_PATH}"
 			export USE_CCACHE=1
-			export CCACHE_COMPRESS
+			export CCACHE_COMPRESS=1
                     '''
             }
         }
