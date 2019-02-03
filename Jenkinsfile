@@ -25,7 +25,6 @@ pipeline {
         stage('Code syncing') {
             steps {
                 echo "Device: ${params.DEVICE}"
-                echo "Branch: ${params.BRANCH}"
             }
         }        
     }
