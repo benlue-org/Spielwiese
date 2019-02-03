@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Preparation') {
             steps {
-                dir("/mnt/los-build/${params.BRANCH}) {
+                dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
                        set -x
                        wget https://raw.githubusercontent.com/los-legacy/local_manifests/$BRANCH/$DEVICE -O .repo/local_manifests/$DEVICE
