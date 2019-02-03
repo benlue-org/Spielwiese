@@ -10,11 +10,19 @@ pipeline {
         choice(name: 'BRANCH', choices: ['lineage-15.1', 'lineage-16.0'], description: 'Pick something')
     }
     stages {
-        stage('Example') {
+        stage('Preparation') {
+            steps {
+                dir("/mnt/los-build/${params.BRANCH}") {
+                    echo "Device: ${params.DEVICE}"
+                    echo "Branch: ${params.BRANCH}"
+                }
+            }
+        }
+        stage('Code syncing') {
             steps {
                 echo "Device: ${params.DEVICE}"
                 echo "Branch: ${params.BRANCH}"
             }
-        }
+        }        
     }
 }
