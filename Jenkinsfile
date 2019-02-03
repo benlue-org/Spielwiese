@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'disabled'
+            label 'master'
         }
     }
     parameters {
@@ -35,11 +35,11 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
-                       */
+                       /*
                        repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
                        source build/envsetup.sh
                        breakfast "$DEVICE"
-                       /*
+                       */
                     '''
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
-                       */
+                       /*
                        source build/envsetup.sh
                        breakfast "$DEVICE"
                        export USE_CCACHE=1
@@ -58,7 +58,7 @@ pipeline {
                        export CCACHE_COMPRESS=1
                        export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
                        brunch "$DEVICE"
-                       /*      
+                       */      
                     '''
                 }
             }
