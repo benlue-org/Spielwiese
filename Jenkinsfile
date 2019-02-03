@@ -26,6 +26,7 @@ pipeline {
                     sh '''#!/bin/bash
                         set -x
                         echo "${MIRROR_PATH}"
+			echo "${PWD}"
                         echo "Hallo"
                     '''
             }
