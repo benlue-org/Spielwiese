@@ -46,7 +46,6 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
-                       source build/envsetup.sh
                        #breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
