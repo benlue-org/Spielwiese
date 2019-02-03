@@ -14,7 +14,7 @@ pipeline {
             steps {
                 dir("/mnt/los-build/${params.BRANCH}") {
                     sh '''#!/bin/bash
-                       set -x\
+                       set -x
                        wget https://raw.githubusercontent.com/los-legacy/local_manifests/$params.BRANCH/$params.DEVICE -O .repo/local_manifests/$params.DEVICE
                     '''
                     echo "Device: ${params.DEVICE}"
