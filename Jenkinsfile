@@ -1,18 +1,15 @@
 pipeline {
-    agent none 
+    agent any
+    environment { 
+        CC = 'clang'
+    }
     stages {
-        stage('Example Build') {
-            agent { docker 'maven:3-alpine' } 
-            steps {
-                echo 'Hello, Maven'
-                sh 'mvn --version'
+        stage('Example') {
+            environment { 
+                AN_ACCESS_KEY = credentials('my-prefined-secret-text') 
             }
-        }
-        stage('Example Test') {
-            agent { docker 'openjdk:8-jre' } 
             steps {
-                echo 'Hello, JDK'
-                sh 'java -version'
+                sh 'printenv'
             }
         }
     }
