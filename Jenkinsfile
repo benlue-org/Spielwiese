@@ -13,7 +13,7 @@ pipeline {
     	BRANCH                  = 'lineage-15.1'
         DEVICE                  = 'jfltexx'
         
-	    USE_CCACHE              =  '1'
+	USE_CCACHE              =  '1'
         CCACHE_COMPRESS         =  '1'
         ANDROID_JACK_VM_ARGS    =  '-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G'
     }
@@ -28,7 +28,7 @@ pipeline {
                         echo "${MIRROR_PATH}"
 			export USE_CCACHE=1
 			export CCACHE_COMPRESS=1
-			export ANDROID_JACK_VM_ARGS=-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G
+			export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
                     '''
             }
         }
