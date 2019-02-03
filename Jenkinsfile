@@ -1,59 +1,17 @@
- agent {
-    node {
-      label 'master'
-      /* customWorkspace '/mnt/los-build' */
-    }
-  }
-    environment {
-        MIRROR_PATH             = '/mnt/los-mirror/LineageOS/android.git'
-        BUILD_PATH              = '/mnt/los-build'
-        DEVICE_PATH             = '/mnt/los-build/device'        
-        
-    	BRANCH                  = 'lineage-15.1'
-        DEVICE                  = 'jfltexx'
-        
-	USE_CCACHE              =  '1'
-        CCACHE_COMPRESS         =  '1'
-        ANDROID_JACK_VM_ARGS    =  'ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"'
-    }
+pipeline {
+    agent any
     stages {
-        stage('Preparation') {
+        stage('Example') {
             steps {
-                echo 'Preparation'
-                    sh("pwd")
-                    sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
-                    sh '''#!/bin/bash
-                        set -x
-                        echo "${MIRROR_PATH}"
-			export USE_CCACHE=1
-			ccache -M 50G
-			export CCACHE_COMPRESS=1
-			export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
-                    '''
+                echo 'Hello World'
+
+                script {
+                    def browsers = ['chrome', 'firefox']
+                    for (int i = 0; i < browsers.size(); ++i) {
+                        echo "Testing the ${browsers[i]} browser"
+                    }
+                }
             }
         }
-        stage('OTA Package') {
-            steps {
-                echo 'OTA Package'
-                dir("${BUILD_PATH}") {
-                    //sh '''#!/bin/bash\nsource build/envsetup.sh\nbreakfast "${DEVICE}"\nprintenv'''
-                }    
-            }
-        }
-        stage('Archiving') {
-            steps {
-                echo 'Archiving'
-                dir("${BUILD_PATH}") {
-                    //sh '''#!/bin/bash\nsource build/envsetup.sh\nbreakfast "${DEVICE}"\nprintenv'''
-                }    
-            }
-        } 
-        stage('Publishing') {
-            steps {
-                echo 'Publishing'
-                dir("${BUILD_PATH}") {
-                    //sh '''#!/bin/bash\nsource build/envsetup.sh\nbreakfast "${DEVICE}"\nprintenv'''
-                }    
-            }
-        }         
     }
+}
