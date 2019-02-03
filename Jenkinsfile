@@ -1,45 +1,58 @@
-pipeline {	
-    agent any
-    environment {
-        MIRROR_PATH = '/mnt/f/los-mirror/LineageOS/android.git'
-        BUILD_PATH  = '/home/lineageos/android/lineage'
+pipeline {
+  agent {
+    node {
+      label 'master'
+      /* customWorkspace '/mnt/los-build' */
     }
-    parameters {
-        string(defaultValue: "Android Parametrized build", description: 'What environment?', name: 'userFlag')
-        choice(choices: ['jfltexx', 'jfvelte'], description: 'Select build device', name: 'device')
-        choice(choices: ['cm-14.1', 'lineage-15.1', 'lineage-16.0'], description: 'Select build branch', name: 'branch')
-        choice(choices: ['local-mirror', 'lineageos-mirror'], description: 'Select sync mirror', name: 'mirror')
+  }
+    environment {
+        MIRROR_PATH             = '/mnt/los-mirror/LineageOS/android.git'
+        BUILD_PATH              = '/mnt/los-build'
+        DEVICE_PATH             = '/mnt/los-build/device'        
+        
+    	BRANCH                  = 'lineage-15.1'
+        DEVICE                  = 'jfltexx'
+        
+	    USE_CCACHE              =  '1'
+        CCACHE_COMPRESS         =  '1'
+        ANDROID_JACK_VM_ARGS    =  '-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G'
     }
     stages {
-        stage("test") {
+        stage('Preparation') {
             steps {
-                echo "${params.device}"
-                echo "${params.branch}"
-                echo "flag: ${params.userFlag}"
+                echo 'Preparation'
+                    sh("pwd")
+                    sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
+                    sh '''#!/bin/bash\
+                        set -x
+                        echo (PWD)
+                        echo "Hallo"
+                    '''
             }
         }
-        stage("preperation") {
+        stage('OTA Package') {
             steps {
-                sh 'mkdir -p ~/bin'
-                sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
-                sh 'chmod a+x ~/bin/repo'
-                echo "Downloading ${params.device}.xml ..."                    
-            }
-        }
-        stage("repo sync") {
-            steps {
+                echo 'OTA Package'
                 dir("${BUILD_PATH}") {
-                    /* ToDo select mirror */
-                    echo "repo init -u ${MIRROR_PATH} -b ${params.branch}"
-                    sh '''#!/bin/bash\nset +x\nsource ~/.profile\nrepo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)'''
-                echo "Repo was syncing from ${params.mirror}"
-                }
+                    //sh '''#!/bin/bash\nsource build/envsetup.sh\nbreakfast "${DEVICE}"\nprintenv'''
+                }    
             }
         }
-        stage("build prozess") {
+        stage('Archiving') {
             steps {
-                echo "Building ${params.device} ${params.branch}"
+                echo 'Archiving'
+                dir("${BUILD_PATH}") {
+                    //sh '''#!/bin/bash\nsource build/envsetup.sh\nbreakfast "${DEVICE}"\nprintenv'''
+                }    
             }
-        }
+        } 
+        stage('Publishing') {
+            steps {
+                echo 'Publishing'
+                dir("${BUILD_PATH}") {
+                    //sh '''#!/bin/bash\nsource build/envsetup.sh\nbreakfast "${DEVICE}"\nprintenv'''
+                }    
+            }
+        }         
     }
 }
