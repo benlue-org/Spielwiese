@@ -19,8 +19,8 @@ pipeline {
                        //mkdir -p ~/bin
                        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
                        source ~/.profile
-                       /*
-                       repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
+                       
+                       //repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
                        //mkdir -p .repo/local_manifests
                        wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml
                        */
@@ -35,11 +35,9 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
-                       /*
-                       repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
+                       //repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
                        source build/envsetup.sh
-                       breakfast "$DEVICE"
-                       */
+                       //breakfast "$DEVICE"
                     '''
                 }
             }
@@ -50,14 +48,13 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
-                       /*
                        source build/envsetup.sh
-                       breakfast "$DEVICE"
+                       //breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
                        export CCACHE_COMPRESS=1
                        export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
-                       brunch "$DEVICE"
+                       //brunch "$DEVICE"
                        */      
                     '''
                 }
