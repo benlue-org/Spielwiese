@@ -23,7 +23,7 @@ pipeline {
                 echo 'Preparation'
                     sh("pwd")
                     sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
-                    sh '''#!/bin/bash\
+                    sh '''#!/bin/bash
                         set -x
                         echo (PWD)
                         echo "Hallo"
