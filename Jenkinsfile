@@ -25,7 +25,7 @@ pipeline {
                     sh 'curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo'
                     sh '''#!/bin/bash
                         set -x
-                        echo ${'MIRROR_PATH'}
+                        echo "${MIRROR_PATH}"
                         echo "Hallo"
                     '''
             }
