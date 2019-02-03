@@ -15,7 +15,7 @@ pipeline {
         
 	USE_CCACHE              =  '1'
         CCACHE_COMPRESS         =  '1'
-        ANDROID_JACK_VM_ARGS    =  'ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G'
+        ANDROID_JACK_VM_ARGS    =  'ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"'
     }
     stages {
         stage('Preparation') {
