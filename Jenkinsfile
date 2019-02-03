@@ -17,7 +17,6 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml
-                       $
                     '''
                     echo "Device: ${params.DEVICE}"
                     echo "Branch: ${params.BRANCH}"
