@@ -1,5 +1,4 @@
-pipeline {
-  agent {
+ agent {
     node {
       label 'master'
       /* customWorkspace '/mnt/los-build' */
@@ -58,4 +57,3 @@ pipeline {
             }
         }         
     }
-}
