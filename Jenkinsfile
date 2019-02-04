@@ -34,8 +34,6 @@ pipeline {
                        set -x
                        source ~/.profile
                        repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
-                       source build/envsetup.sh
-                       breakfast "$DEVICE"
                     '''
                 }
             }
@@ -45,6 +43,8 @@ pipeline {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
                        set -x
+                       source build/envsetup.sh
+                       breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
                        export CCACHE_COMPRESS=1
