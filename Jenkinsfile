@@ -33,7 +33,7 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
-                       #repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
+                       repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
                        source build/envsetup.sh
                        #breakfast "$DEVICE"
                     '''
