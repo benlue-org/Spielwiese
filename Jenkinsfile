@@ -19,6 +19,7 @@ pipeline {
                        mkdir -p ~/bin
                        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
                        source ~/.profile
+                       make clean
                        rm -rf .repo/local_manifests
                        repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
                        mkdir -p .repo/local_manifests
@@ -43,7 +44,7 @@ pipeline {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
                        set -x
-                       source build/envsetup.sh
+                       source build/envsetup.sh                   
                        breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
