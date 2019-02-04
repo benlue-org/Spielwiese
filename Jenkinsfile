@@ -35,7 +35,7 @@ pipeline {
                        source ~/.profile
                        repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
                        source build/envsetup.sh
-                       #breakfast "$DEVICE"
+                       breakfast "$DEVICE"
                     '''
                 }
             }
@@ -45,13 +45,11 @@ pipeline {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
                        set -x
-                       source ~/.profile
-                       #breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
                        export CCACHE_COMPRESS=1
                        export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
-                       #brunch "$DEVICE" 
+                       brunch "$DEVICE" 
                     '''
                 }
             }
