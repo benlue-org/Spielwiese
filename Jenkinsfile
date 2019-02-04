@@ -19,8 +19,8 @@ pipeline {
                        mkdir -p ~/bin
                        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
                        source ~/.profile
-                       
-                       #repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
+                       rm -rf .repo/local_manifests
+                       repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
                        mkdir -p .repo/local_manifests
                        wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml                                        
                     '''
