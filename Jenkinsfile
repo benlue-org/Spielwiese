@@ -57,11 +57,35 @@ pipeline {
                 }
             }
         }        
-        stage('Example') {
+        stage('OTA Package') {
             steps {
-                    echo "Device: ${params.DEVICE}"
-                    echo "Branch: ${params.BRANCH}"
+                dir("/mnt/los-build/${BRANCH}") {
+                    sh '''#!/bin/bash
+                       set -x
+                       echo "some code"
+                    '''
+                }
             }
-        }
+        } 
+        stage('Archiving') {
+            steps {
+                dir("/mnt/los-build/${BRANCH}") {
+                    sh '''#!/bin/bash
+                       set -x
+                       echo "some code"
+                    '''
+                }
+            }
+        } 
+        stage('Publishing') {
+            steps {
+                dir("/mnt/los-build/${BRANCH}") {
+                    sh '''#!/bin/bash
+                       set -x
+                       echo "some code"
+                    '''
+                }
+            }
+        }          
     }
 }
