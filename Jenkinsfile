@@ -19,7 +19,7 @@ pipeline {
                        mkdir -p ~/bin
                        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
                        source ~/.profile
-#                       make clean
+                       make clean
                        rm -rf .repo/local_manifests
                        repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
                        mkdir -p .repo/local_manifests
@@ -34,7 +34,7 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source ~/.profile
- #                      repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
+                       repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
                        ./device/samsung/jf-common/patches/apply.sh
                     '''
                 }
@@ -46,12 +46,12 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        source build/envsetup.sh                   
-#                       breakfast "$DEVICE"
+                       breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
                        export CCACHE_COMPRESS=1
                        export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
-#                       brunch "$DEVICE"
+                       brunch "$DEVICE"
                        ./device/samsung/jf-common/patches/revert.sh
                     '''
                 }
@@ -73,6 +73,7 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        cp ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip /var/www/html/download/
+                       cp ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip.md5sum /var/www/html/download/
                     '''
                 }
             }
