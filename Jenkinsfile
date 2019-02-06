@@ -17,17 +17,18 @@ pipeline {
                     sh '''#!/bin/bash
                        set -x
                        if [[ ! -e ~/bin/repo ]]; then
-                            mkdir -p ~/bin
+                            mkdir -p ~/bin                        
                             curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+                            chmod a+x ~/bin/repo
                        fi
                        set +x
                        source ~/.profile
                        set -x
                        make clean
-                       if [[ ! -e .repo/local_manifests ]]; then
+                       if [[ ! -e .repo/local_manifests/*xml ]]; then
                             rm -rf .repo/local_manifests
                             mkdir -p .repo/local_manifests
-                            wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml                                        
+                            wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml
                             repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
                        fi
                     '''
