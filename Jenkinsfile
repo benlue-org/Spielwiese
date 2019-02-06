@@ -15,11 +15,15 @@ pipeline {
             steps {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
-                       set -x
+                       set +x
                        mkdir -p ~/bin
+                       set -x
                        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+                       set +x
                        source ~/.profile
+                       set -x
                        make clean
+                       set +x
                        rm -rf .repo/local_manifests
                        repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
                        mkdir -p .repo/local_manifests
@@ -32,8 +36,9 @@ pipeline {
             steps {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
-                       set -x
+                       set +x
                        source ~/.profile
+                       set -x
                        repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
                        ./device/samsung/jf-common/patches/apply.sh
                     '''
@@ -44,8 +49,9 @@ pipeline {
             steps {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
+                       set +x
+                       source build/envsetup.sh
                        set -x
-                       source build/envsetup.sh                   
                        breakfast "$DEVICE"
                        export USE_CCACHE=1
                        ccache -M 50G
