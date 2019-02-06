@@ -15,19 +15,21 @@ pipeline {
             steps {
                 dir("/mnt/los-build/${BRANCH}") {
                     sh '''#!/bin/bash
-                       set +x
-                       mkdir -p ~/bin
                        set -x
-                       curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+                       if [[ ! -e ~/bin/repo ]]; then
+                            mkdir -p ~/bin
+                            curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+                       fi
                        set +x
                        source ~/.profile
                        set -x
                        make clean
-                       set +x
-                       rm -rf .repo/local_manifests
-                       repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
-                       mkdir -p .repo/local_manifests
-                       wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml                                        
+                       if [[ ! -e .repo/local_manifests ]]; then
+                            rm -rf .repo/local_manifests
+                            mkdir -p .repo/local_manifests
+                            wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml                                        
+                            repo init -u /mnt/los-mirror/LineageOS/android.git -b "$BRANCH"
+                       fi
                     '''
                 }
             }
@@ -78,8 +80,10 @@ pipeline {
                 dir("/mnt/los-build/${BRANCH}/out/target/product/${DEVICE}") {
                     sh '''#!/bin/bash
                        set -x
-                       cp ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip /var/www/html/download/
-                       cp ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip.md5sum /var/www/html/download/
+                       if [[ ! -e ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip ]]; then
+                            cp ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip /var/www/html/download/
+                            cp ${BRANCH}-*-UNOFFICIAL-${DEVICE}.zip.md5sum /var/www/html/download/
+                       fi                       
                     '''
                 }
             }
