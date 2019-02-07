@@ -8,7 +8,7 @@ properties([
 ])
 node('builder') {  
     stage('Preparation') {
-        ws('/mnt/los-build/${BRANCH}') {
+        dir("/mnt/los-build/${BRANCH}") {
             echo "Make some preparation"
             echo "init repo in $BUILD_DIR"
             echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
