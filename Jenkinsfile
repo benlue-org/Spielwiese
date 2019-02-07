@@ -8,13 +8,15 @@ properties([
 ])
 node('builder') {  
     stage('Preparation') { 
-        echo "repo ini -u url -b $BRANCH" 
+        echo "init repo in $BUILD_DIR"
+        echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH" 
     }
     stage('Repo Sync') { 
         echo "Syncing repo" 
     }
     stage('Build Process') { 
-        echo "Build los rom for $DEVICE with branch $BRANCH" 
+        echo "Build los rom for $DEVICE with branch $BRANCH"
+        echo "in $BUILD_DIR"
     }
     stage('OTA Package') {
         //
