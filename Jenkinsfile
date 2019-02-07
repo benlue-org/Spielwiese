@@ -8,9 +8,12 @@ properties([
 ])
 node('builder') {  
     stage('Preparation') {
-        echo "Make some preparation"
-        echo "init repo in $BUILD_DIR"
-        echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH" 
+        dir('/mnt/los-build/${BRANCH}') {
+            echo "Make some preparation"
+            echo "init repo in $BUILD_DIR"
+            echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
+            echo "$PWD"
+        }
     }
     stage('Repo Sync') { 
         echo "Syncing repo" 
