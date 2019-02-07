@@ -14,7 +14,7 @@ node('builder') {
             echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
             sh '''#!/bin/bash
                 set -x
-                ls -lah
+                pwd
             '''
         }
     }
