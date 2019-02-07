@@ -12,7 +12,10 @@ node('builder') {
             echo "Make some preparation"
             echo "init repo in $BUILD_DIR"
             echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
-            echo pwd()
+            sh '''#!/bin/bash
+                set -x
+                ls -lah
+            '''
         }
     }
     stage('Repo Sync') { 
