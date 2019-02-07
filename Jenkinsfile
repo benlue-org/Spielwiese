@@ -1,11 +1,20 @@
 node {  
-    stage('Build') { 
+    stage('Preparation') { 
         // 
     }
-    stage('Test') { 
+    stage('Repo Sync') { 
         // 
     }
-    stage('Deploy') { 
+    stage('Build Process') { 
         // 
+    }
+    stage('OTA Package') {
+        //
+    }
+    stage('Archiving') {
+        //
+    }
+    stage('Publishing') {
+        //
     }
 }
