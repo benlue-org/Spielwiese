@@ -1,9 +1,9 @@
 properties([
-  parameters([choice(choices: ['jfltexx', 'jfvelte'], description: 'select your device', name: 'Device')])
+  parameters([choice(choices: ['jfltexx', 'jfvelte'], description: 'select your device', name: 'DEVICE')])
 ])
 node('builder') {  
     stage('Preparation') { 
-        echo "{params.choice} World!" 
+        echo "{params.DEVICE} World!" 
     }
     stage('Repo Sync') { 
         // 
