@@ -1,14 +1,9 @@
 properties([
-  [$class: 'ParametersDefinitionProperty', parameterDefinitions: [
-    [$class: 'StringParameterDefinition',
-      name: 'Greeting',
-      defaultValue: 'Hello',
-      description: 'How should I greet the world?']
-  ]]
+  parameters([choice(choices: ['jfltexx', 'jfvelte'], description: 'select your device', name: 'Device')])
 ])
 node('builder') {  
     stage('Preparation') { 
-        echo "{params.Greeting} World!" 
+        echo "{params.choice} World!" 
     }
     stage('Repo Sync') { 
         // 
