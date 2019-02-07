@@ -14,7 +14,8 @@ node('builder') {
     stage('Repo Sync') { 
         echo "Syncing repo" 
     }
-    stage('Build Process') { 
+    stage('Build Process') {
+        echo "Start build process"
         echo "Build los rom for $DEVICE with branch $BRANCH"
         echo "in $BUILD_DIR"
     }
