@@ -1,7 +1,7 @@
 properties([
   parameters([
     choice(choices: ['jfltexx', 'jfvelte'], description: 'select your device', name: 'DEVICE'), 
-    choice(choices: ['15.1', '16.0'], description: 'select your branch', name: 'BRANCH')
+    choice(choices: ['lineage-15.1', 'lineage-16.0'], description: 'select your branch', name: 'BRANCH')
   ])
 ])
 node('builder') {  
