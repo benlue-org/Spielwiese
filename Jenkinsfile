@@ -8,11 +8,11 @@ properties([
 ])
 node('builder') {  
     stage('Preparation') {
-        dir('/mnt/los-build/${BRANCH}') {
+        ws('/mnt/los-build/${BRANCH}') {
             echo "Make some preparation"
             echo "init repo in $BUILD_DIR"
             echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
-            echo "$PWD"
+            pwd()
         }
     }
     stage('Repo Sync') { 
