@@ -19,20 +19,53 @@ node('builder') {
         }
     }
     stage('Repo Sync') { 
-        echo "Syncing repo" 
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Make some preparation"
+            echo "init repo in $BUILD_DIR"
+            echo "repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)"
+            sh '''#!/bin/bash
+                set -x
+                pwd
+            '''
+        }
     }
     stage('Build Process') {
-        echo "Start build process"
-        echo "Build los rom for $DEVICE with branch $BRANCH"
-        echo "in $BUILD_DIR"
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Starting build process..."
+            echo ". build/envsetup.sh"
+            echo "lunch lineage_$DEVICE-userdebug"
+            echo "make bacon -j$(nproc --all)"
+            sh '''#!/bin/bash
+                set -x
+                pwd
+            '''
+        }
     }
     stage('OTA Package') {
-        echo "Build OTA Package"
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Build OTA package..."
+            sh '''#!/bin/bash
+                set -x
+                pwd
+            '''
+        }
     }
     stage('Archiving') {
-        echo "Archiving the build"
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Archiving your build..."
+            sh '''#!/bin/bash
+                set -x
+                pwd
+            '''
+        }
     }
     stage('Publishing') {
-        echo "Publishing the build"
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Publishing your build..."
+            sh '''#!/bin/bash
+                set -x
+                pwd
+            '''
+        }
     }
 }
