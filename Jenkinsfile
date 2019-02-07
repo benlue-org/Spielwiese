@@ -3,7 +3,7 @@ properties([
 ])
 node('builder') {  
     stage('Preparation') { 
-        echo "{params.DEVICE} World!" 
+        echo "{$DEVICE} World!" 
     }
     stage('Repo Sync') { 
         // 
