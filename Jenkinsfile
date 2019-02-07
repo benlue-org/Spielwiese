@@ -22,7 +22,7 @@ node('builder') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Make some preparation"
             echo "init repo in $BUILD_DIR"
-            echo "repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)"
+            echo "repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j4"
             sh '''#!/bin/bash
                 set -x
                 pwd
@@ -34,7 +34,7 @@ node('builder') {
             echo "Starting build process..."
             echo ". build/envsetup.sh"
             echo "lunch lineage_$DEVICE-userdebug"
-            echo "make bacon -j$(nproc --all)"
+            echo "make bacon -j4"
             sh '''#!/bin/bash
                 set -x
                 pwd
