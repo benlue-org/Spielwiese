@@ -21,12 +21,12 @@ node('builder') {
         echo "in $BUILD_DIR"
     }
     stage('OTA Package') {
-        //
+        echo "Build OTA Package"
     }
     stage('Archiving') {
-        //
+        echo "Archiving the build"
     }
     stage('Publishing') {
-        //
+        echo "Publishing the build"
     }
 }
