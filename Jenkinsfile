@@ -1,6 +1,6 @@
 properties([
   parameters([
-    choice(choices: ['jfltexx', 'jfvelte'], description: 'select your device', name: 'DEVICE')
+    choice(choices: ['jfltexx', 'jfvelte'], description: 'select your device', name: 'DEVICE'), 
     choice(choices: ['15.1', '16.0'], description: 'select your branch', name: 'BRANCH')
   ])
 ])
