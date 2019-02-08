@@ -22,7 +22,7 @@ node('builder') {
                     rm -rf .repo/local_manifests/*xml                         
                 fi
                 wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml
-            ```
+            '''
             }
     }
     stage('Repo Sync') { 
