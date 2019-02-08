@@ -34,11 +34,17 @@ node('builder') {
     }
     stage('Repo Sync') { 
         dir("/mnt/los-build/${BRANCH}") {
-            echo "Make some preparation"
-            echo "init repo in $BUILD_DIR"
-            echo "repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j4"
+            echo "Execute repo sync..."
             sh ''' set -x
-                pwd
+                repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
+            '''
+        }
+    }
+    stage('Patching Process') { 
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Execute patch script..."
+            sh ''' set -x
+                ./device/samsung/jf-common/patches/apply.sh
             '''
         }
     }
@@ -49,10 +55,20 @@ node('builder') {
             echo "lunch lineage_$DEVICE-userdebug"
             echo "make bacon -j4"
             sh ''' set -x
-                pwd
+                . build/envsetup.sh
+                lunch lineage_$DEVICE-userdebug
+                make bacon -j4
             '''
         }
     }
+    stage('Revert Patch') { 
+        dir("/mnt/los-build/${BRANCH}") {
+            echo "Execute patch script..."
+            sh ''' set -x
+                ./device/samsung/jf-common/patches/revert.sh
+            '''
+        }
+    }  
     stage('OTA Package') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Build OTA package..."
