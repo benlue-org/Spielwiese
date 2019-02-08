@@ -12,6 +12,13 @@ node('builder') {
             echo "Make some preparation"
             echo "init repo in $BUILD_DIR"
             echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
+            sh ''' set -x
+                if [[ ! -e ~/bin/repo ]]; then
+                    mkdir -p ~/bin                        
+                    curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+                    chmod a+x ~/bin/repo
+                fi
+            '''
             sh '''
                 if [[ ! -e $BUILD_DIR/$BRANCH/.repo ]]; then
                     repo init -u $MIRROR_DIR/LineageOS/android.git -b $BRANCH
