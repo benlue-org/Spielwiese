@@ -32,6 +32,10 @@ node('builder') {
             '''
             }
     }
+    stage('Mirror Sync') { 
+            echo "Execute mirror sync..."
+            build 'benlue-org/mirror-sync/master'
+    }
     stage('Repo Sync') { 
         dir("/mnt/los-build/${BRANCH}") {
             echo "Execute repo sync..."
@@ -41,7 +45,7 @@ node('builder') {
                 repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
             '''
         }
-    }
+    }  
     stage('Patching Process') { 
         dir("/mnt/los-build/${BRANCH}") {
             echo "Execute patch script..."
