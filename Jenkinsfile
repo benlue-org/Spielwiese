@@ -37,7 +37,7 @@ node('builder') {
             echo "Execute repo sync..."
             sh ''' set -x
                 source ~/.profile
-                repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
+                #repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
             '''
         }
     }
@@ -57,6 +57,10 @@ node('builder') {
             echo "make bacon -j4"
             sh ''' set -x
                 . build/envsetup.sh
+                export USE_CCACHE=1
+                ccache -M 50G
+                export CCACHE_COMPRESS=1
+                export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
                 lunch lineage_$DEVICE-userdebug
                 make bacon -j4
             '''
