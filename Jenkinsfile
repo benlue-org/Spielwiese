@@ -36,6 +36,7 @@ node('builder') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Execute repo sync..."
             sh ''' set -x
+                . ~/.profiles
                 repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
             '''
         }
