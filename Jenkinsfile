@@ -35,9 +35,10 @@ node('builder') {
     stage('Repo Sync') { 
         dir("/mnt/los-build/${BRANCH}") {
             echo "Execute repo sync..."
+            build 'benlue-org/mirror-sync/master'
             sh ''' set -x
                 source ~/.profile
-                #repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
+                repo sync -f --force-sync --force-broken --no-clone-bundle --no-tags -j$(nproc --all)
             '''
         }
     }
