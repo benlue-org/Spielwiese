@@ -13,12 +13,19 @@ node('builder') {
             echo "init repo in $BUILD_DIR"
             echo "repo init -u $BUILD_DIR/$BRANCH -b $BRANCH"
             sh '''#!/bin/bash
-                set -x
                 if [[ ! -e $BUILD_DIR/$BRANCH/.repo ]]; then
                     repo init -u $MIRROR_DIR/LineageOS/android.git -b $BRANCH
                 fi
             '''
-        }
+            sh '''#!/bin/bash
+                if [[ ! -e .repo/local_manifests/*xml ]]; then
+                    rm -rf .repo/local_manifests/*xml                         
+                fi
+            ```
+            sh '''#!/bin/bash
+                wget https://raw.githubusercontent.com/los-legacy/local_manifests/"$BRANCH"/"$DEVICE".xml -O .repo/local_manifests/"$DEVICE".xml
+            '''
+            }
     }
     stage('Repo Sync') { 
         dir("/mnt/los-build/${BRANCH}") {
