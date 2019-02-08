@@ -41,8 +41,7 @@ node('builder') {
             echo ". build/envsetup.sh"
             echo "lunch lineage_$DEVICE-userdebug"
             echo "make bacon -j4"
-            sh '''#!/bin/bash
-                set -x
+            sh ''' set -x
                 pwd
             '''
         }
@@ -50,8 +49,7 @@ node('builder') {
     stage('OTA Package') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Build OTA package..."
-            sh '''#!/bin/bash
-                set -x
+            sh ''' set -x
                 pwd
             '''
         }
@@ -59,8 +57,7 @@ node('builder') {
     stage('Archiving') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Archiving your build..."
-            sh '''#!/bin/bash
-                set -x
+            sh ''' set -x
                 pwd
             '''
         }
@@ -68,8 +65,7 @@ node('builder') {
     stage('Publishing') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Publishing your build..."
-            sh '''#!/bin/bash
-                set -x
+            sh ''' set -x
                 pwd
             '''
         }
