@@ -6,7 +6,7 @@ properties([
     choice(choices: ['lineage-15.1', 'lineage-16.0'], description: 'select your branch', name: 'BRANCH')
   ])
 ])
-node('builder') {  
+node('swarm') {  
     stage('Preparation') {
         dir("/mnt/los-build/${BRANCH}") {
             echo "Make some preparation"
